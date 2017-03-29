@@ -64,7 +64,7 @@ namespace cis237inclass5
                 Console.WriteLine(foundCar.id + " " + foundCar.make + " " + foundCar.model);
 
 
-            // Handles creating
+            // Handles writing
             //************************************
             // Add a new car to the database
             //************************************
@@ -121,6 +121,42 @@ namespace cis237inclass5
                 Console.WriteLine("That car doesn't exist");
             else
                 Console.WriteLine(carTofind.id + " " + carTofind.make + " " + carTofind.model);
+
+
+            // Handles Updating
+            //************************************
+            // update a car in the database
+            //************************************
+
+            // get a car out of the database that we would like to update
+            Car carToFindForUpdate = CarTestEntities.Cars.Find("V0LCD1814");
+
+            Console.WriteLine("done.");
+
+            Console.WriteLine(Environment.NewLine + "=============== UPDATE BY ID ===============");
+            // output the car to find
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + "About to do an update");
+            Console.WriteLine(carToFindForUpdate.id + " " + carToFindForUpdate.make +
+                                    " " + carToFindForUpdate.model);
+            Console.WriteLine("Doing the update now");
+
+            // update some of the properties of the car we found
+            // all of them if we don't want to
+            carToFindForUpdate.make = "Dodge";
+            carToFindForUpdate.model = "Ram 1500";
+            carToFindForUpdate.horsepower = 5000;
+            carToFindForUpdate.cylinders = 8;
+
+            // save the new updates to the database. Since when we pulled out the one 
+            // to update, all we were really doing was getting a reference to the one in
+            // the collection we wanted to update, there is no need ot 'put' the car
+            // back into the cars collection. it is still there.
+            // all we have to do is save the changes.
+            CarTestEntities.SaveChanges();
+
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + "showing the car after update");
+            Console.WriteLine(carToFindForUpdate.id + " " + carToFindForUpdate.make +
+                                    " " + carToFindForUpdate.model + " " + carToFindForUpdate.horsepower + " " + carToFindForUpdate.cylinders);
         }
     }
 }
